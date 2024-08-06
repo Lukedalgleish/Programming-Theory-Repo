@@ -33,8 +33,4 @@ public class Bullet : MonoBehaviour
         objectPool.Release(this);  
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Destroy(other.gameObject);
-    }
 }

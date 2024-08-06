@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9126827275905022847}
   - component: {fileID: 1572187460201046583}
   - component: {fileID: 8902670748028898861}
+  - component: {fileID: 9185632549995216722}
   m_Layer: 0
   m_Name: Jogger
   m_TagString: Untagged
@@ -99,7 +100,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -107,3 +108,15 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9185632549995216722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2761849960558582357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85df7126c94cb30408965134bbeca895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -9,7 +9,7 @@ public class Gun : MonoBehaviour
 
     [SerializeField] private Bullet bulletPrefab;
 
-    [SerializeField] private float muzzleVelocity = 2.5f;
+    [SerializeField] private int muzzleVelocity = 700;
 
     [SerializeField] private GameObject gunMuzzle;
 
@@ -43,7 +43,7 @@ public class Gun : MonoBehaviour
             bulletObject.transform.SetPositionAndRotation(gunMuzzle.transform.position, oritentation.transform.rotation);
 
             // Move the bullet
-            bulletObject.GetComponent<Rigidbody>().AddForce(transform.up * 1000, ForceMode.Acceleration);
+            bulletObject.GetComponent<Rigidbody>().AddForce(transform.up * muzzleVelocity, ForceMode.Acceleration);
 
             // Stop the bullet after a certain amount of time. 
             bulletObject.Deactivate();
@@ -79,4 +79,5 @@ public class Gun : MonoBehaviour
     {
         Destroy(pooledObject.gameObject);
     }
+
 }
