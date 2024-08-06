@@ -5,25 +5,36 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
-{   
+{
     private Rigidbody rb;
-    private float bulletVelocity = 2.5f;
+
+    private IObjectPool<Bullet> objectPool;
+    
+    // Deactivate after a certain amount of time. 
     [SerializeField] private float destroyTime = 3f;
 
-    void Start()
+    // public property to give the bullet a reference to its ObjectPool
+    public IObjectPool<Bullet> ObjectPool { set => objectPool = value; }
+
+    public void Deactivate()
     {
-        rb = GetComponent<Rigidbody>();
-        Destroy(gameObject, destroyTime);
+        StartCoroutine(DeactivateRoutine(destroyTime));
     }
 
-    private void Update()
+    IEnumerator DeactivateRoutine(float delay)
     {
-        rb.AddForce(transform.forward * bulletVelocity, ForceMode.Acceleration);
+        yield return new WaitForSeconds(delay);
+        // Reset the moving rigidbody
+        rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        // Release allows the object to return itself back to the pool. 
+        objectPool.Release(this);  
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
         Destroy(other.gameObject);
     }
 }
