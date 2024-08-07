@@ -8,12 +8,12 @@ public class Jogger : Enemies
     void Start()
     {
         health = 100;
-        movementSpeed = 5;
+        movementSpeed = 8;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        FollowPlayer();
     }
 }

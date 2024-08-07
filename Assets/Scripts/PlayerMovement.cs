@@ -46,6 +46,9 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
 
+    //tracking player
+    public static Vector3 playerPositionInstance { get; private set; }
+
     void Awake() {
         rb = GetComponent<Rigidbody>();
     }
@@ -64,6 +67,9 @@ public class PlayerMovement : MonoBehaviour {
     private void Update() {
         MyInput();
         Look();
+        PlayerPosition();
+
+
     }
 
     /// <summary>
@@ -261,6 +267,11 @@ public class PlayerMovement : MonoBehaviour {
             cancellingGrounded = true;
             Invoke(nameof(StopGrounded), Time.deltaTime * delay);
         }
+    }
+
+    private void PlayerPosition()
+    {
+        playerPositionInstance = transform.position;
     }
 
     private void StopGrounded() {

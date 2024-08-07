@@ -14,6 +14,8 @@ public class Sprinter : Enemies
     // Update is called once per frame
     void Update()
     {
-        
+        FollowPlayer();
     }
+
+
 }

@@ -16,12 +16,6 @@ public class SpawnEnemies : MonoBehaviour
         StartCoroutine(SpawningEnemies());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     IEnumerator SpawningEnemies()
     {
         while (gameover == false)
