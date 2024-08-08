@@ -378,3 +378,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7a9a896d19c65458be78f826e2e580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 0}
+  muzzleVelocity: 700
+  gunMuzzle: {fileID: 0}
+  oritentation: {fileID: 0}
+  collectionCheck: 1
+  defaultCapacity: 30
+  maxCapacity: 60

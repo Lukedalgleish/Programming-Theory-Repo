@@ -8,11 +8,6 @@ public class Enemies : MonoBehaviour
     protected int health;
     protected int movementSpeed = 10;
     protected int bulletDamage = 50;
-    //[SerializeField] protected GameObject player;
-    protected int EnemiesStayAtPosY = 1;
-
-    //public Transform player;
-    //public Vector3 playerPos;
 
     // Start is called before the first frame update
     void Start()
@@ -28,18 +23,25 @@ public class Enemies : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        DealDamage();
-        Debug.Log(health);
-        if (health <= 0)
+        BulletDamage();
+
+        if (other.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            //SpawnEnemies.gameover = true;
+            Debug.Log("Game over!"); 
         }
     }
 
-    public void DealDamage()
+    public void BulletDamage()
     {
         health -= bulletDamage;
+        Debug.Log(gameObject.name + " " + health);
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+            SpawnEnemies.currentAmountofEnemies--;
+        }
     }
 
     public void FollowPlayer()

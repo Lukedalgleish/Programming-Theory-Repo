@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2451714645752003181}
   m_Layer: 0
   m_Name: Sprinter
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 915548574857953584}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.053, y: 1.31, z: 7.8757854}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -120,4 +120,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b81b14e55b1894193d3b60032c9786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7365293399706549347, guid: a6944e98f87721348b1f03e3cf631c3e, type: 3}
