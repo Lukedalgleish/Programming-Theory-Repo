@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class Enemies : MonoBehaviour
 {
+    //public InGameUI inGameUIScript;
+
     protected int health;
     protected int movementSpeed = 10;
     protected int bulletDamage = 50;
+
+    private void Start()
+    {
+        
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,6 +22,8 @@ public class Enemies : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+            //inGameUIScript.DeathScreen();
+
             SpawnEnemies.gameover = true;
             Debug.Log("Game over!"); 
         }

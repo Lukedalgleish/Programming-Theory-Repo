@@ -8,7 +8,7 @@ public class Jogger : Enemies
     void Start()
     {
         health = 100;
-        movementSpeed = 8;
+        movementSpeed = 10;
     }
 
     // Update is called once per frame

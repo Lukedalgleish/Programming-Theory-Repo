@@ -7,7 +7,7 @@ public class Walker : Enemies
     void Start()
     {
         health = 200;
-        movementSpeed = 5;
+        movementSpeed = 8;
     }
 
     void Update()

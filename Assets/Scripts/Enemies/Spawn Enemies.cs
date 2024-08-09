@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Pool;
+
 
 public class SpawnEnemies : MonoBehaviour
 {
     [SerializeField] private GameObject[] spawnPositions, enemies;
-    private int spawnPositionIndex, enemiesIndex, spawnRate = 3, currentRound = 1;
+    private int spawnPositionIndex, enemiesIndex, spawnRate = 3;
+
+    public static int currentRound {get; private set;}
+
     private Vector3 enemySpawnPosition;
     private int amountOfEnemiesToSpawn = 3;
     private int amountOfEnemiesToAdd = 2;
@@ -15,6 +17,8 @@ public class SpawnEnemies : MonoBehaviour
 
     
     public int amountofEnemiesSpawned = 0;
+
+
     public static int currentAmountOfEnemies;
 
     public static bool gameover = false; // need to change this to encapsulate this at some point 
@@ -23,31 +27,15 @@ public class SpawnEnemies : MonoBehaviour
 
     void Start()
     {
+        currentRound = 1;
         StartCoroutine(SpawnRate());
     }
-
-    /*private void Update()
-    {
-        if (amountofEnemiesSpawned <= amountOfEnemiesToSpawn && reachedTargetAmountOfEnemiesSpawned == false)
-        {
-            ChooseRandomEnemy();
-            ChooseRandomSpawnLocation();
-            SpawnEnemy();
-            amountofEnemiesSpawned++;
-            if (amountofEnemiesSpawned == amountOfEnemiesToSpawn)
-            {
-                reachedTargetAmountOfEnemiesSpawned = true;
-            }
-
-            
-        }
-    }*/
 
     IEnumerator SpawnRate()
     {
         while (gameover == false)
         {
-            if (amountofEnemiesSpawned <= amountOfEnemiesToSpawn && reachedTargetAmountOfEnemiesSpawned == false)
+            while (amountofEnemiesSpawned <= amountOfEnemiesToSpawn && reachedTargetAmountOfEnemiesSpawned == false)
             { 
                 SpawnEnemy();
                 amountofEnemiesSpawned++;
@@ -56,7 +44,9 @@ public class SpawnEnemies : MonoBehaviour
                 if (amountofEnemiesSpawned == amountOfEnemiesToSpawn)
                 {
                     reachedTargetAmountOfEnemiesSpawned = true;
-                }    
+                }
+
+                yield return new WaitForSeconds(spawnRate);
             }
             if (reachedTargetAmountOfEnemiesSpawned == true && currentAmountOfEnemies == 0)
             {
@@ -70,8 +60,8 @@ public class SpawnEnemies : MonoBehaviour
                 Debug.Log("The new amount of enemies that will spawn on round: " + currentRound + " is: " + amountOfEnemiesToSpawn);
             }
 
-            yield return new WaitForSeconds(spawnRate);
-        } 
+            yield return new WaitForSeconds(1); // adding this line stopped it from crashing? I need to figure out why this is the case. 
+        }
     }
 
     private void SpawnEnemy()
