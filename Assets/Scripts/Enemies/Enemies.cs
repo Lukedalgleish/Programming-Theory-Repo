@@ -9,25 +9,13 @@ public class Enemies : MonoBehaviour
     protected int movementSpeed = 10;
     protected int bulletDamage = 50;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         BulletDamage();
 
         if (other.CompareTag("Player"))
         {
-            //SpawnEnemies.gameover = true;
+            SpawnEnemies.gameover = true;
             Debug.Log("Game over!"); 
         }
     }
@@ -35,12 +23,12 @@ public class Enemies : MonoBehaviour
     public void BulletDamage()
     {
         health -= bulletDamage;
-        Debug.Log(gameObject.name + " " + health);
 
         if(health <= 0)
         {
             Destroy(gameObject);
-            SpawnEnemies.currentAmountofEnemies--;
+            SpawnEnemies.currentAmountOfEnemies--;
+            Debug.Log("The current amount of Enemies now alive: " + SpawnEnemies.currentAmountOfEnemies);
         }
     }
 
