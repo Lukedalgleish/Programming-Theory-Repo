@@ -11,14 +11,10 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentRoundUIText;
 
     // Start is called before the first frame update
-    void GoBackToMainMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
 
     private void Update()
     {
-        if(SpawnEnemies.gameover == true)
+        if(Enemies.playerDead == true)
         {
             DeathScreen();
         }
@@ -31,5 +27,17 @@ public class InGameUI : MonoBehaviour
         deathScreenUI.SetActive(true);
         deathScreenRoundText.text = "Rounds Survived: " + SpawnEnemies.currentRound;
 
+
     }
+
+    public void ResetScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void GoBackToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
 }

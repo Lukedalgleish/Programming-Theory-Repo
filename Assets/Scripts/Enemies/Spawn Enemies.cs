@@ -21,10 +21,6 @@ public class SpawnEnemies : MonoBehaviour
 
     public static int currentAmountOfEnemies;
 
-    public static bool gameover = false; // need to change this to encapsulate this at some point 
-
-    // Start is called before the first frame update
-
     void Start()
     {
         currentRound = 1;
@@ -33,7 +29,7 @@ public class SpawnEnemies : MonoBehaviour
 
     IEnumerator SpawnRate()
     {
-        while (gameover == false)
+        while (Enemies.playerDead == false)
         {
             while (amountofEnemiesSpawned <= amountOfEnemiesToSpawn && reachedTargetAmountOfEnemiesSpawned == false)
             { 

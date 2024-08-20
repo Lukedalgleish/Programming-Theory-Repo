@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour {
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
     }
 
     
@@ -69,6 +70,11 @@ public class PlayerMovement : MonoBehaviour {
         Look();
         PlayerPosition();
 
+        if (Enemies.playerDead) 
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
     }
 

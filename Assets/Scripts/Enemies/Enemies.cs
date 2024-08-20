@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Enemies : MonoBehaviour
 {
-    //public InGameUI inGameUIScript;
+    public static bool playerDead { get; private set; }
+
 
     protected int health;
     protected int movementSpeed = 10;
@@ -13,7 +14,7 @@ public class Enemies : MonoBehaviour
 
     private void Start()
     {
-        
+        playerDead = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,10 +23,7 @@ public class Enemies : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            //inGameUIScript.DeathScreen();
-
-            SpawnEnemies.gameover = true;
-            Debug.Log("Game over!"); 
+            playerDead = true;
         }
     }
 
