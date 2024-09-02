@@ -27,6 +27,7 @@ public class InGameUI : MonoBehaviour
         deathScreenUI.SetActive(true);
         deathScreenRoundText.text = "Rounds Survived: " + SpawnEnemies.currentRound;
 
+        // Need to do a check here that a highscore has been achieved.
 
     }
 
