@@ -14,7 +14,6 @@ public class SpawnEnemies : MonoBehaviour
     private int amountOfEnemiesToSpawn = 3;
     private int amountOfEnemiesToAdd = 2;
     private bool reachedTargetAmountOfEnemiesSpawned = false;
-
     
     public int amountofEnemiesSpawned = 0;
 
@@ -47,13 +46,13 @@ public class SpawnEnemies : MonoBehaviour
             if (reachedTargetAmountOfEnemiesSpawned == true && currentAmountOfEnemies == 0)
             {
                 currentRound++;
-                Debug.Log("The current round is: " + currentRound);
+                //Debug.Log("The current round is: " + currentRound);
                 amountofEnemiesSpawned = 0;
                 amountOfEnemiesToSpawn += amountOfEnemiesToAdd;
 
                 reachedTargetAmountOfEnemiesSpawned = false;
 
-                Debug.Log("The new amount of enemies that will spawn on round: " + currentRound + " is: " + amountOfEnemiesToSpawn);
+                //Debug.Log("The new amount of enemies that will spawn on round: " + currentRound + " is: " + amountOfEnemiesToSpawn);
             }
 
             yield return new WaitForSeconds(1); // adding this line stopped it from crashing? I need to figure out why this is the case. 

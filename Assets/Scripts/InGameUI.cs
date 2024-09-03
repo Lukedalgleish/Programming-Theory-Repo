@@ -10,8 +10,6 @@ public class InGameUI : MonoBehaviour
     public TextMeshProUGUI deathScreenRoundText;
     [SerializeField] private TextMeshProUGUI currentRoundUIText;
 
-    // Start is called before the first frame update
-
     private void Update()
     {
         if(Enemies.playerDead == true)
@@ -28,6 +26,7 @@ public class InGameUI : MonoBehaviour
         deathScreenRoundText.text = "Rounds Survived: " + SpawnEnemies.currentRound;
 
         // Need to do a check here that a highscore has been achieved.
+
 
     }
 

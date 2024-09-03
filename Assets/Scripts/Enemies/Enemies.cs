@@ -35,7 +35,7 @@ public class Enemies : MonoBehaviour
         {
             Destroy(gameObject);
             SpawnEnemies.currentAmountOfEnemies--;
-            Debug.Log("The current amount of Enemies now alive: " + SpawnEnemies.currentAmountOfEnemies);
+            //Debug.Log("The current amount of Enemies now alive: " + SpawnEnemies.currentAmountOfEnemies);
         }
     }
 
