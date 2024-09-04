@@ -9,6 +9,7 @@ public class InGameUI : MonoBehaviour
     public GameObject deathScreenUI;    
     public TextMeshProUGUI deathScreenRoundText;
     [SerializeField] private TextMeshProUGUI currentRoundUIText;
+    [SerializeField] private GameObject highscorePopUpObject;
 
     private void Update()
     {
@@ -25,8 +26,11 @@ public class InGameUI : MonoBehaviour
         deathScreenUI.SetActive(true);
         deathScreenRoundText.text = "Rounds Survived: " + SpawnEnemies.currentRound;
 
-        // Need to do a check here that a highscore has been achieved.
-
+        if(HighscoreLogic.achievedHighScore == true)
+        {
+            // set the highscore screen to active
+            highscorePopUpObject.SetActive(true);
+        }
 
     }
 
