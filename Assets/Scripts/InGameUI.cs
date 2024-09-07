@@ -11,6 +11,8 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentRoundUIText;
     [SerializeField] private GameObject highscorePopUpObject;
 
+    public static string playerInputString { get; private set; }
+
     private void Update()
     {
         if(Enemies.playerDead == true)
@@ -34,9 +36,20 @@ public class InGameUI : MonoBehaviour
 
     }
 
+    public void ReadPlayerStringInput(string input)
+    {
+        playerInputString = input;
+        Debug.Log(playerInputString);
+    }
+
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void SaveData()
+    {
+        HighscoreLogic.Instance.Save();
     }
 
     public void GoBackToMainMenu()

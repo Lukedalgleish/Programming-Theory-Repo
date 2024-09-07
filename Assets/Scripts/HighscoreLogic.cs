@@ -9,48 +9,40 @@ public class HighscoreLogic : MonoBehaviour
     public static HighscoreLogic Instance;
 
     private int currentRound;
+    private string currentPlayerName = InGameUI.playerInputString;
 
     private bool scoreCheck = false;
     public static bool achievedHighScore { get; private set; }
 
     public int[] highscores = new int[5];
-
-    public static string firstPlaceName { get; private set; } 
-    public static string secondPlaceName { get; private set; }
-    public static string thirdPlaceName { get; private set; }
-    public static int firstPlaceRounds { get; private set; }
-    public static int secondPlaceRounds { get; private set; }
-    public static int thirdPlaceRounds { get; private set; }
+    public string[] highscoreNames = new string[5];
 
     // Update is called once per frame
 
     private void Awake()
     {
-        if (Instance != null)
+
+        // Check if an instance of the singleton already exists
+        if (Instance == null)
         {
-            Destroy(Instance);
-            return;
+            // If not, set the instance to this instance
+            Instance = this;
+
+            // Optional: Prevent this object from being destroyed when a new scene loads
+            DontDestroyOnLoad(gameObject);
         }
-        Instance = this;
-        DontDestroyOnLoad(Instance);
+        else
+        {
+            // If an instance already exists and it's not this, destroy this object
+            Destroy(gameObject);
+        }
 
-        highscores[0] = 5; highscores[1] = 3; highscores[2] = 1;
-
-        // I'll need to load the data when the game first loads when there is actually data
-        //Load();
+        Load();
     }
-
-    [System.Serializable]
-    class HighscoreData
-    {
-        public string firstPlaceName, secondPlaceName, thirdPlaceName;
-        public int firstPlaceRounds, secondPlaceRounds, thirdPlaceRounds;
-    }
-
     private void Start()
     {
         achievedHighScore = false;
-        Save();
+        PrintHighScoresAndNames();
 
     }
     void Update()
@@ -58,23 +50,33 @@ public class HighscoreLogic : MonoBehaviour
         if (Enemies.playerDead == true && scoreCheck == false)
         {
             CheckNewScore();
-            //PrintHighScores();
-            // I'll need to save and load the data here i think. 
+            PrintHighScoresAndNames();
         }
+    }
 
+    [System.Serializable]
+    class HighscoreData
+    {
+        public string firstPlaceName, secondPlaceName, thirdPlaceName, fourthPlaceName, fifthPlaceName;
+        public int firstPlaceRounds, secondPlaceRounds, thirdPlaceRounds, fourthPlaceRounds, fifthPlaceRounds;
     }
 
     public void Save()
     {
         HighscoreData data = new HighscoreData();
 
-        /*data.firstPlaceName = firstPlaceName;
-        data.secondPlaceName = secondPlaceName;
-        data.thirdPlaceName = thirdPlaceName;*/
+        data.firstPlaceName = highscoreNames[0];
+        data.secondPlaceName = highscoreNames[1];
+        data.thirdPlaceName = highscoreNames[2];
+        data.fourthPlaceName = highscoreNames[3];
+        data.fifthPlaceName = highscoreNames[4];
+
         data.firstPlaceRounds = highscores[0];
         data.secondPlaceRounds = highscores[1];
         data.thirdPlaceRounds = highscores[2];
-
+        data.fourthPlaceRounds = highscores[3];
+        data.fifthPlaceRounds = highscores[4];
+        
         string json = JsonUtility.ToJson(data);
 
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
@@ -89,12 +91,17 @@ public class HighscoreLogic : MonoBehaviour
             string json = File.ReadAllText(path);
             HighscoreData data = JsonUtility.FromJson<HighscoreData>(json);
 
-            /*firstPlaceName = data.firstPlaceName;
-            secondPlaceName = data.secondPlaceName;
-            thirdPlaceName = data.thirdPlaceName;*/
-            firstPlaceRounds = data.firstPlaceRounds;
-            secondPlaceRounds = data.secondPlaceRounds;
-            thirdPlaceRounds = data.thirdPlaceRounds;
+            highscoreNames[0] = data.firstPlaceName;
+            highscoreNames[1] = data.secondPlaceName;
+            highscoreNames[2] = data.thirdPlaceName;
+            highscoreNames[3] = data.fourthPlaceName;
+            highscoreNames[4] = data.fifthPlaceName;
+
+            highscores[0] = data.firstPlaceRounds;
+            highscores[1] = data.secondPlaceRounds;
+            highscores[2] = data.thirdPlaceRounds;
+            highscores[3] = data.fourthPlaceRounds;
+            highscores[4] = data.fifthPlaceRounds;
 
             Debug.Log(path);
         }
@@ -104,7 +111,7 @@ public class HighscoreLogic : MonoBehaviour
         scoreCheck = true;
         currentRound = SpawnEnemies.currentRound;
 
-        if (thirdPlaceRounds > currentRound)
+        if (highscores[4] > currentRound)
         {
             Debug.Log("The round you got to wasnt high enough to get into the highscores you loser, git gud");
             return;
@@ -112,35 +119,36 @@ public class HighscoreLogic : MonoBehaviour
         
         for (int i = 0; i < highscores.Length; i++)
         {
+            // checks if the the round the player got to is greater than the current round. 
             if (highscores[i] < currentRound)
             {
+                // We need to move all the highscores down one
+                for (int j = highscores.Length - 1; j > i; j--)
+                {
+                    highscores[j] = highscores[j - 1];
+                    highscoreNames[j] = highscoreNames[j - 1];
+                }
+
                 highscores[i] = currentRound;
-                Debug.Log("The value at Array index: " + i + " is lower so your current score: " + currentRound + " will be entered into this array index!");
-                Debug.Log("the value at the Index " + i + " is " + highscores[i]);
+                highscoreNames[i] = currentPlayerName;
                 achievedHighScore = true;
+                Save();
                 return;
-            }
-
-            if (highscores[i] == currentRound)
-            {
-
             }
 
             else
             {
                 Debug.Log("The value at Array index: " + i + " is greater or equal to " + currentRound + " checking the next index...");
             }
-            
-
-
         }
+        
     }
 
-    /*void PrintHighScores()
+    void PrintHighScoresAndNames()
     {
-        for (int i = 0; i < highScore.Length; i++)
+        for (int i = 0; i < highscores.Length; i++)
         {
-            Debug.Log("The value at Array index: " + i + " " + highScore[i]);
+            Debug.Log("Name: " + highscoreNames[i] + " Rounds: " + highscores[i]);
         }
-    }*/
+    }
 }
