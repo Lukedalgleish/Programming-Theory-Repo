@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
     public GameObject deathScreenUI;    
     public TextMeshProUGUI deathScreenRoundText;
+    public TextMeshProUGUI userInputField;  // Assign InputField from the Inspector
     [SerializeField] private TextMeshProUGUI currentRoundUIText;
     [SerializeField] private GameObject highscorePopUpObject;
 
@@ -15,6 +17,7 @@ public class InGameUI : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log(userInputField.text);
         if(Enemies.playerDead == true)
         {
             DeathScreen();
@@ -36,20 +39,20 @@ public class InGameUI : MonoBehaviour
 
     }
 
-    public void ReadPlayerStringInput(string input)
+    public void SaveHighscoreButton()
     {
-        playerInputString = input;
+        HighscoreLogic.Instance.InsertNewHighScore();
+    }
+
+    public void GetUserInput()
+    {
+        playerInputString = userInputField.text; // Get the text from the InputField
         Debug.Log(playerInputString);
     }
 
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void SaveData()
-    {
-        HighscoreLogic.Instance.Save();
     }
 
     public void GoBackToMainMenu()

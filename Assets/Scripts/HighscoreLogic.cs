@@ -9,7 +9,6 @@ public class HighscoreLogic : MonoBehaviour
     public static HighscoreLogic Instance;
 
     private int currentRound;
-    private string currentPlayerName = InGameUI.playerInputString;
 
     private bool scoreCheck = false;
     public static bool achievedHighScore { get; private set; }
@@ -49,8 +48,7 @@ public class HighscoreLogic : MonoBehaviour
     {
         if (Enemies.playerDead == true && scoreCheck == false)
         {
-            CheckNewScore();
-            PrintHighScoresAndNames();
+            CheckScore();
         }
     }
 
@@ -106,7 +104,7 @@ public class HighscoreLogic : MonoBehaviour
             Debug.Log(path);
         }
     }
-    public void CheckNewScore()
+    public void CheckScore()
     {
         scoreCheck = true;
         currentRound = SpawnEnemies.currentRound;
@@ -116,7 +114,14 @@ public class HighscoreLogic : MonoBehaviour
             Debug.Log("The round you got to wasnt high enough to get into the highscores you loser, git gud");
             return;
         }
-        
+
+        achievedHighScore = true;
+
+    }
+
+
+    public void InsertNewHighScore()
+    {
         for (int i = 0; i < highscores.Length; i++)
         {
             // checks if the the round the player got to is greater than the current round. 
@@ -129,9 +134,12 @@ public class HighscoreLogic : MonoBehaviour
                     highscoreNames[j] = highscoreNames[j - 1];
                 }
 
+                highscoreNames[i] = InGameUI.playerInputString;
                 highscores[i] = currentRound;
-                highscoreNames[i] = currentPlayerName;
-                achievedHighScore = true;
+                
+
+                PrintHighScoresAndNames();
+
                 Save();
                 return;
             }
@@ -141,9 +149,7 @@ public class HighscoreLogic : MonoBehaviour
                 Debug.Log("The value at Array index: " + i + " is greater or equal to " + currentRound + " checking the next index...");
             }
         }
-        
     }
-
     void PrintHighScoresAndNames()
     {
         for (int i = 0; i < highscores.Length; i++)
