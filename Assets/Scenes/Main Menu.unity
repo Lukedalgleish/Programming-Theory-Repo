@@ -1058,6 +1058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highScoreUI: {fileID: 664081643}
   optionsUI: {fileID: 996788692}
+  HighscoreRankings: {fileID: 286696069}
 --- !u!4 &858000926
 Transform:
   m_ObjectHideFlags: 0
