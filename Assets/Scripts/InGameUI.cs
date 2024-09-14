@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
-    public GameObject deathScreenUI;    
-    public TextMeshProUGUI deathScreenRoundText;
-    public TextMeshProUGUI userInputField;  // Assign InputField from the Inspector
     [SerializeField] private TextMeshProUGUI currentRoundUIText;
     [SerializeField] private GameObject highscorePopUpObject;
-
+    
+    private GameObject deathScreenUI;    
+    private TextMeshProUGUI deathScreenRoundText, userInputField; 
+    
     public static string playerInputString { get; private set; }
 
     private void Update()
@@ -33,7 +30,6 @@ public class InGameUI : MonoBehaviour
 
         if(HighscoreLogic.achievedHighScore == true)
         {
-            // set the highscore screen to active
             highscorePopUpObject.SetActive(true);
         }
 

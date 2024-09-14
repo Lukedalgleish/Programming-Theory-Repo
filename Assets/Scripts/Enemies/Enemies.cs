@@ -6,11 +6,9 @@ using UnityEngine;
 public class Enemies : MonoBehaviour
 {
     public static bool playerDead { get; private set; }
-
-
     protected int health;
-    protected int movementSpeed = 10;
     protected int bulletDamage = 50;
+
 
     private void Start()
     {
@@ -35,11 +33,10 @@ public class Enemies : MonoBehaviour
         {
             Destroy(gameObject);
             SpawnEnemies.currentAmountOfEnemies--;
-            //Debug.Log("The current amount of Enemies now alive: " + SpawnEnemies.currentAmountOfEnemies);
         }
     }
 
-    public void FollowPlayer()
+    public void FollowPlayer(int movementSpeed)
     {
         transform.position = Vector3.MoveTowards(this.transform.position, PlayerMovement.playerPositionInstance, movementSpeed * Time.deltaTime);
     }

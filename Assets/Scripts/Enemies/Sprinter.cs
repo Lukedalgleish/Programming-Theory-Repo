@@ -8,13 +8,12 @@ public class Sprinter : Enemies
     void Start()
     {
         health = 50;
-        movementSpeed = 14;
     }
 
     // Update is called once per frame
     void Update()
     {
-        FollowPlayer();
+        FollowPlayer(14);
     }
 
 

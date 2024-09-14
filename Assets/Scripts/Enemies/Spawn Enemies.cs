@@ -5,20 +5,22 @@ using UnityEngine;
 
 public class SpawnEnemies : MonoBehaviour
 {
-    [SerializeField] private GameObject[] spawnPositions, enemies;
-    private int spawnPositionIndex, enemiesIndex, spawnRate = 3;
+    public static int currentRound { get; private set; }
 
-    public static int currentRound {get; private set;}
+    [SerializeField] private GameObject[] spawnPositions, enemies;
 
     private Vector3 enemySpawnPosition;
-    private int amountOfEnemiesToSpawn = 3;
-    private int amountOfEnemiesToAdd = 2;
+
     private bool reachedTargetAmountOfEnemiesSpawned = false;
-    
-    public int amountofEnemiesSpawned = 0;
+
+    private int spawnPositionIndex, enemiesIndex, spawnRate = 3;
+    private int amountOfEnemiesToSpawn = 3; // this will always 
+    private int amountOfEnemiesToAdd = 2;
+    private int amountofEnemiesSpawned = 0;
 
 
     public static int currentAmountOfEnemies;
+    // Need to abstract out this static class variable
 
     void Start()
     {
@@ -46,13 +48,11 @@ public class SpawnEnemies : MonoBehaviour
             if (reachedTargetAmountOfEnemiesSpawned == true && currentAmountOfEnemies == 0)
             {
                 currentRound++;
-                //Debug.Log("The current round is: " + currentRound);
                 amountofEnemiesSpawned = 0;
                 amountOfEnemiesToSpawn += amountOfEnemiesToAdd;
 
                 reachedTargetAmountOfEnemiesSpawned = false;
 
-                //Debug.Log("The new amount of enemies that will spawn on round: " + currentRound + " is: " + amountOfEnemiesToSpawn);
             }
 
             yield return new WaitForSeconds(1); // adding this line stopped it from crashing? I need to figure out why this is the case. 

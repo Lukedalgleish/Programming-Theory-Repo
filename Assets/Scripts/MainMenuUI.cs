@@ -2,12 +2,15 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Text;
 
 public class MainMenuUI : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI HighscoreRankings;
     [SerializeField] private GameObject highScoreUI, optionsUI;
     private bool highScoreUIBool, optionsUIBool = false;
-    [SerializeField] TextMeshProUGUI HighscoreRankings;
+    private string HighscoresScoresAndNames;
+    
 
     // Start is called before the first frame update
     public void StartGame()
@@ -26,14 +29,6 @@ public class MainMenuUI : MonoBehaviour
         {
             OptionsUIDisabled();
         }
-
-        HighscoreRankings.text = 
-            HighscoreLogic.Instance.highscoreNames[0] + " --- " +  " Rounds Survived: " + HighscoreLogic.Instance.highscores[0] + "\n" +
-            HighscoreLogic.Instance.highscoreNames[1] + " --- " + " Rounds Survived: " + HighscoreLogic.Instance.highscores[1] + "\n" +
-            HighscoreLogic.Instance.highscoreNames[2] + " --- " + " Rounds Survived: " + HighscoreLogic.Instance.highscores[2] + "\n" +
-            HighscoreLogic.Instance.highscoreNames[3] + " --- " + " Rounds Survived: " + HighscoreLogic.Instance.highscores[3] + "\n" +
-            HighscoreLogic.Instance.highscoreNames[4] + " --- " + " Rounds Survived: " + HighscoreLogic.Instance.highscores[4];
-
     }
 
     public void HighScoreUIEnabled()
@@ -41,12 +36,23 @@ public class MainMenuUI : MonoBehaviour
         highScoreUI.SetActive(true);
         highScoreUIBool = true;
 
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < HighscoreLogic.highscoreNames.Length; i++)
+        {
+             sb.Append(HighscoreLogic.highscoreNames[i] + " --- " + " Rounds Survived: " + HighscoreLogic.highscores[i] + "\n");
+        }
+
+        HighscoreRankings.text = sb.ToString();
+
     }
+
     public void HighScoreUIDisabled()
     {
         highScoreUI.SetActive(false);
         highScoreUIBool = false;
     }
+
     public void OptionsUIEnabled()
     {
         optionsUI.SetActive(true);
@@ -58,9 +64,6 @@ public class MainMenuUI : MonoBehaviour
         optionsUI.SetActive(false);
         optionsUIBool = false;
     }
-
-
-
 
     public void ExitGame()
     {
