@@ -6,13 +6,21 @@ using UnityEngine;
 public class Enemies : MonoBehaviour
 {
     public static bool playerDead { get; private set; }
-    protected int health;
-    protected int bulletDamage = 50;
+    public static int destroyedChildCount { get; private set; }
 
+    protected int health;
+    protected int movementSpeed = 10;
+    protected int bulletDamage = 50;
+    
 
     private void Start()
     {
         playerDead = false;
+    }
+
+    private void Update()
+    {
+        Debug.Log(destroyedChildCount);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,10 +37,12 @@ public class Enemies : MonoBehaviour
     {
         health -= bulletDamage;
 
-        if(health <= 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
+            destroyedChildCount++;
             SpawnEnemies.currentAmountOfEnemies--;
+            //Debug.Log("The current amount of Enemies now alive: " + SpawnEnemies.currentAmountOfEnemies);
         }
     }
 

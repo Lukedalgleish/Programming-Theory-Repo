@@ -14,7 +14,6 @@ public class Sprinter : Enemies
     void Update()
     {
         FollowPlayer(14);
+
     }
-
-
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -12,21 +13,20 @@ public class SpawnEnemies : MonoBehaviour
     private Vector3 enemySpawnPosition;
 
     private bool reachedTargetAmountOfEnemiesSpawned = false;
-
     private int spawnPositionIndex, enemiesIndex, spawnRate = 3;
-    private int amountOfEnemiesToSpawn = 3; // this will always 
+    private int amountOfEnemiesToSpawn = 3;
     private int amountOfEnemiesToAdd = 2;
     private int amountofEnemiesSpawned = 0;
 
 
     public static int currentAmountOfEnemies;
-    // Need to abstract out this static class variable
 
     void Start()
     {
         currentRound = 1;
         StartCoroutine(SpawnRate());
     }
+
 
     IEnumerator SpawnRate()
     {
@@ -45,6 +45,7 @@ public class SpawnEnemies : MonoBehaviour
 
                 yield return new WaitForSeconds(spawnRate);
             }
+
             if (reachedTargetAmountOfEnemiesSpawned == true && currentAmountOfEnemies == 0)
             {
                 currentRound++;
@@ -55,7 +56,7 @@ public class SpawnEnemies : MonoBehaviour
 
             }
 
-            yield return new WaitForSeconds(1); // adding this line stopped it from crashing? I need to figure out why this is the case. 
+            yield return new WaitForSeconds(1); 
         }
     }
 

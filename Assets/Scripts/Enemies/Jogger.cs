@@ -14,5 +14,6 @@ public class Jogger : Enemies
     void Update()
     {
         FollowPlayer(10);
+
     }
 }

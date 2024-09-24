@@ -6,10 +6,10 @@ public class InGameUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI currentRoundUIText;
     [SerializeField] private GameObject highscorePopUpObject;
-    
-    private GameObject deathScreenUI;    
-    private TextMeshProUGUI deathScreenRoundText, userInputField; 
-    
+
+    [SerializeField] private GameObject deathScreenUI;
+    [SerializeField] private TextMeshProUGUI deathScreenRoundText;
+    [SerializeField] TMP_InputField userInputField;
     public static string playerInputString { get; private set; }
 
     private void Update()
@@ -32,7 +32,6 @@ public class InGameUI : MonoBehaviour
         {
             highscorePopUpObject.SetActive(true);
         }
-
     }
 
     public void SaveHighscoreButton()
@@ -42,8 +41,8 @@ public class InGameUI : MonoBehaviour
 
     public void GetUserInput()
     {
-        playerInputString = userInputField.text; // Get the text from the InputField
-        Debug.Log(playerInputString);
+        playerInputString = userInputField.text;
+        //Debug.Log(playerInputString);
     }
 
     public void ResetScene()
@@ -55,5 +54,6 @@ public class InGameUI : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
 
 }

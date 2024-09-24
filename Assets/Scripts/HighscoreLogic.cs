@@ -108,7 +108,7 @@ public class HighscoreLogic : MonoBehaviour
         scoreCheck = true;
         currentRound = SpawnEnemies.currentRound;
 
-        if (highscores[4] > currentRound)
+        if (highscores[4] >= currentRound)
         {
             Debug.Log("The round you got to wasnt high enough to get into the highscores you loser, git gud");
             return;
@@ -135,15 +135,19 @@ public class HighscoreLogic : MonoBehaviour
 
                 highscoreNames[i] = InGameUI.playerInputString;
                 highscores[i] = currentRound;
-              
+
+                PrintHighScoresAndNames();
                 Save();
                 return;
             }
+        }
+    }
 
-            else
-            {
-                Debug.Log("The value at Array index: " + i + " is greater or equal to " + currentRound + " checking the next index...");
-            }
+    void PrintHighScoresAndNames()
+    {
+        for (int i = 0; i < highscores.Length; i++)
+        {
+            Debug.Log("Name: " + highscoreNames[i] + " Rounds: " + highscores[i]);
         }
     }
 }

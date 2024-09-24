@@ -3105,7 +3105,6 @@ MonoBehaviour:
   - {fileID: 881379072791806211, guid: 66536f1494bfbd94390320475d9e341c, type: 3}
   - {fileID: 2761849960558582357, guid: e37dedf4a006e0048b5ae7f04093f323, type: 3}
   - {fileID: 915548574857953584, guid: 01287f368cedf82429fd162a1cfdfd01, type: 3}
-  amountofEnemiesSpawned: 0
 --- !u!114 &1992620791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3118,11 +3117,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbfa3237838d9c94290aaf15e1e836bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreenUI: {fileID: 1381663248}
-  deathScreenRoundText: {fileID: 447688304}
-  userInputField: {fileID: 1938525547}
   currentRoundUIText: {fileID: 1952846730}
   highscorePopUpObject: {fileID: 26046339}
+  deathScreenUI: {fileID: 1381663248}
+  deathScreenRoundText: {fileID: 447688304}
+  userInputField: {fileID: 784486393}
 --- !u!1 &2011291473 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2391979914783309332, guid: a6944e98f87721348b1f03e3cf631c3e, type: 3}
