@@ -34,6 +34,7 @@ public class Enemies : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerDead = true;
+            HighscoreLogic.Instance.CheckScore(); // After dying we check if a new highscore has been acheived. 
         }
     }
 

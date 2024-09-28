@@ -12,7 +12,6 @@ public class HighscoreLogic : MonoBehaviour
     public static string[] highscoreNames { get; private set; }
 
     private int currentRound;
-    private bool scoreCheck = false;
     
 
     // Update is called once per frame
@@ -43,13 +42,6 @@ public class HighscoreLogic : MonoBehaviour
         achievedHighScore = false;
         PrintHighScoresAndNames();
 
-    }
-    void Update()
-    {
-        if (Enemies.playerDead == true /*&& scoreCheck == false*/)
-        {
-            CheckScore();
-        }
     }
 
     [System.Serializable]
@@ -106,7 +98,6 @@ public class HighscoreLogic : MonoBehaviour
     }
     public void CheckScore()
     {
-        //scoreCheck = true;
         currentRound = SpawnEnemies.currentRound;
 
         if (highscores[4] >= currentRound)
