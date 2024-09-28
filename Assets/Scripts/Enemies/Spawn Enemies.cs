@@ -7,20 +7,20 @@ public class SpawnEnemies : MonoBehaviour
     [SerializeField] private GameObject[] spawnPositions, enemies;
     private Vector3 enemySpawnPosition;
     public static int currentRound { get; private set; }
-    public static int amountOfEnemiesToSpawn { get; private set; }
-    public static int amountOfEnemiesToAdd { get; private set; }
+    //public static int amountOfEnemiesToSpawn { get; private set; }
+    //public static int amountOfEnemiesToAdd { get; private set; }
     public static bool allEnemiesAreDead { get; private set; }
 
     private bool reachedTargetAmountOfEnemiesSpawned = false;
     private int spawnPositionIndex, enemiesIndex, spawnRate = 3;
     private int amountofEnemiesSpawned = 0;
+    private int amountOfEnemiesToSpawn = 3;
+    private int amountOfEnemiesToAdd = 2;
 
     void Start()
     {
         allEnemiesAreDead = false;
         currentRound = 1;
-        amountOfEnemiesToSpawn = 3;
-        amountOfEnemiesToAdd = 2;
         StartCoroutine(StartSpawningEnemies());
     }
 

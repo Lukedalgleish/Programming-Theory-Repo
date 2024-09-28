@@ -14,7 +14,6 @@ public class InGameUI : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(userInputField.text);
         if(Enemies.playerDead == true)
         {
             DeathScreen();

@@ -41,11 +41,12 @@ public class HighscoreLogic : MonoBehaviour
     private void Start()
     {
         achievedHighScore = false;
+        PrintHighScoresAndNames();
 
     }
     void Update()
     {
-        if (Enemies.playerDead == true && scoreCheck == false)
+        if (Enemies.playerDead == true /*&& scoreCheck == false*/)
         {
             CheckScore();
         }
@@ -105,7 +106,7 @@ public class HighscoreLogic : MonoBehaviour
     }
     public void CheckScore()
     {
-        scoreCheck = true;
+        //scoreCheck = true;
         currentRound = SpawnEnemies.currentRound;
 
         if (highscores[4] >= currentRound)
@@ -113,9 +114,7 @@ public class HighscoreLogic : MonoBehaviour
             Debug.Log("The round you got to wasnt high enough to get into the highscores you loser, git gud");
             return;
         }
-
         achievedHighScore = true;
-
     }
 
 
@@ -135,9 +134,22 @@ public class HighscoreLogic : MonoBehaviour
 
                 highscoreNames[i] = InGameUI.playerInputString;
                 highscores[i] = currentRound;
+
                 Save();
+
+                achievedHighScore = false; // We need to set this back to false here to not mess up the states when we restart the scene.
+
+
                 return;
             }
+        }
+    }
+
+    void PrintHighScoresAndNames()
+    {
+        for (int i = 0; i < highscores.Length; i++)
+        {
+            Debug.Log("Name: " + highscoreNames[i] + " Rounds: " + highscores[i]);
         }
     }
 }

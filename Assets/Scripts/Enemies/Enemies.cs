@@ -15,6 +15,7 @@ public class Enemies : MonoBehaviour
 
     private void Start()
     {
+        destroyedChildCount = 0;
         playerDead = false;
     }
 
@@ -52,8 +53,4 @@ public class Enemies : MonoBehaviour
         transform.position = Vector3.MoveTowards(this.transform.position, PlayerMovement.playerPositionInstance, movementSpeed * Time.deltaTime);
     }
 
-    IEnumerator delay()
-    {
-        yield return new WaitForSeconds(1.5f);
-    }
 }
