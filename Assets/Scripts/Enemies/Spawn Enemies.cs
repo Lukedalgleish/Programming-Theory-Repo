@@ -1,34 +1,30 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class SpawnEnemies : MonoBehaviour
 {
-    public static int currentRound { get; private set; }
-
     [SerializeField] private GameObject[] spawnPositions, enemies;
-
     private Vector3 enemySpawnPosition;
+    public static int currentRound { get; private set; }
+    public static int amountOfEnemiesToSpawn { get; private set; }
+    public static int amountOfEnemiesToAdd { get; private set; }
+    public static bool allEnemiesAreDead { get; private set; }
 
     private bool reachedTargetAmountOfEnemiesSpawned = false;
     private int spawnPositionIndex, enemiesIndex, spawnRate = 3;
-    private int amountOfEnemiesToSpawn = 3;
-    private int amountOfEnemiesToAdd = 2;
     private int amountofEnemiesSpawned = 0;
-
-
-    public static int currentAmountOfEnemies;
 
     void Start()
     {
+        allEnemiesAreDead = false;
         currentRound = 1;
-        StartCoroutine(SpawnRate());
+        amountOfEnemiesToSpawn = 3;
+        amountOfEnemiesToAdd = 2;
+        StartCoroutine(StartSpawningEnemies());
     }
 
-
-    IEnumerator SpawnRate()
+    IEnumerator StartSpawningEnemies()
     {
         while (Enemies.playerDead == false)
         {
@@ -36,32 +32,37 @@ public class SpawnEnemies : MonoBehaviour
             { 
                 SpawnEnemy();
                 amountofEnemiesSpawned++;
-                currentAmountOfEnemies++;
 
                 if (amountofEnemiesSpawned == amountOfEnemiesToSpawn)
                 {
                     reachedTargetAmountOfEnemiesSpawned = true;
                 }
 
-                yield return new WaitForSeconds(spawnRate);
+                yield return new WaitForSeconds(spawnRate); // We need this line to ensure theres an interval between each enemy spawning.
             }
 
-            if (reachedTargetAmountOfEnemiesSpawned == true && currentAmountOfEnemies == 0)
-            {
-                currentRound++;
-                amountofEnemiesSpawned = 0;
-                amountOfEnemiesToSpawn += amountOfEnemiesToAdd;
-
-                reachedTargetAmountOfEnemiesSpawned = false;
-
-            }
+            CheckIfEnemiesAreAllDead();
 
             yield return new WaitForSeconds(1); 
+        }
+
+    }
+
+    private void CheckIfEnemiesAreAllDead()
+    {
+        if (reachedTargetAmountOfEnemiesSpawned == true && Enemies.destroyedChildCount == amountOfEnemiesToSpawn)
+        {
+            allEnemiesAreDead = true;
+            currentRound++;
+            amountofEnemiesSpawned = 0;
+            amountOfEnemiesToSpawn += amountOfEnemiesToAdd;
+            reachedTargetAmountOfEnemiesSpawned = false;
         }
     }
 
     private void SpawnEnemy()
     {
+        allEnemiesAreDead = false;
         ChooseRandomEnemy();
         ChooseRandomSpawnLocation();
         Instantiate(enemies[enemiesIndex], enemySpawnPosition, gameObject.transform.rotation);
@@ -75,7 +76,6 @@ public class SpawnEnemies : MonoBehaviour
 
     private void ChooseRandomEnemy()
     {
-        enemiesIndex = Random.Range(0, enemies.Length);
-        
+        enemiesIndex = Random.Range(0, enemies.Length);   
     }
 }

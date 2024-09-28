@@ -20,7 +20,10 @@ public class Enemies : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(destroyedChildCount);
+        if (SpawnEnemies.allEnemiesAreDead == true)
+        {
+            destroyedChildCount = 0;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,8 +44,6 @@ public class Enemies : MonoBehaviour
         {
             Destroy(gameObject);
             destroyedChildCount++;
-            SpawnEnemies.currentAmountOfEnemies--;
-            //Debug.Log("The current amount of Enemies now alive: " + SpawnEnemies.currentAmountOfEnemies);
         }
     }
 
@@ -51,4 +52,8 @@ public class Enemies : MonoBehaviour
         transform.position = Vector3.MoveTowards(this.transform.position, PlayerMovement.playerPositionInstance, movementSpeed * Time.deltaTime);
     }
 
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(1.5f);
+    }
 }

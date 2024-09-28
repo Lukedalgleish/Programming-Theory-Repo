@@ -42,7 +42,6 @@ public class InGameUI : MonoBehaviour
     public void GetUserInput()
     {
         playerInputString = userInputField.text;
-        //Debug.Log(playerInputString);
     }
 
     public void ResetScene()

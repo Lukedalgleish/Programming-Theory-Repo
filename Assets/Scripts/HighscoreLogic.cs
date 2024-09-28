@@ -135,19 +135,9 @@ public class HighscoreLogic : MonoBehaviour
 
                 highscoreNames[i] = InGameUI.playerInputString;
                 highscores[i] = currentRound;
-
-                PrintHighScoresAndNames();
                 Save();
                 return;
             }
-        }
-    }
-
-    void PrintHighScoresAndNames()
-    {
-        for (int i = 0; i < highscores.Length; i++)
-        {
-            Debug.Log("Name: " + highscoreNames[i] + " Rounds: " + highscores[i]);
         }
     }
 }
