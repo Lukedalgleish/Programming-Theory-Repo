@@ -12,9 +12,6 @@ public class HighscoreLogic : MonoBehaviour
     public static string[] highscoreNames { get; private set; }
 
     private int currentRound;
-    
-
-    // Update is called once per frame
 
     private void Awake()
     {
@@ -129,7 +126,6 @@ public class HighscoreLogic : MonoBehaviour
                 Save();
 
                 achievedHighScore = false; // We need to set this back to false here to not mess up the states when we restart the scene.
-
 
                 return;
             }

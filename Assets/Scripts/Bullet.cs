@@ -16,6 +16,11 @@ public class Bullet : MonoBehaviour
     // public property to give the bullet a reference to its ObjectPool
     public IObjectPool<Bullet> ObjectPool { set => objectPool = value; }
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     public void Deactivate()
     {
         StartCoroutine(DeactivateRoutine(destroyTime));
@@ -25,7 +30,6 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         // Reset the moving rigidbody
-        rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
