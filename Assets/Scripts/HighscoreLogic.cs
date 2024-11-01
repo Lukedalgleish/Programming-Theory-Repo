@@ -37,7 +37,6 @@ public class HighscoreLogic : MonoBehaviour
     private void Start()
     {
         achievedHighScore = false;
-        PrintHighScoresAndNames();
     }
 
     [System.Serializable]
@@ -61,7 +60,6 @@ public class HighscoreLogic : MonoBehaviour
         string json = JsonUtility.ToJson(data);
 
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
-        Debug.Log(json);
     }
 
     public void Load()
@@ -78,8 +76,6 @@ public class HighscoreLogic : MonoBehaviour
                 highscores[i] = data.highscoreValues[i];
 
             }
-
-            Debug.Log(path);
         }
     }
     public void CheckScore()
