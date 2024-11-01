@@ -40,7 +40,7 @@ public class MainMenuUI : MonoBehaviour
 
         for (int i = 0; i < HighscoreLogic.highscoreNames.Length; i++)
         {
-             sb.Append(HighscoreLogic.highscoreNames[i] + " --- " + " Rounds Survived: " + HighscoreLogic.highscores[i] + "\n");
+            sb.Append(HighscoreLogic.highscoreNames[i] + " --- " + " Rounds Survived: " + HighscoreLogic.highscores[i] + "\n"); 
         }
 
         HighscoreRankings.text = sb.ToString();

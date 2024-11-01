@@ -38,31 +38,25 @@ public class HighscoreLogic : MonoBehaviour
     {
         achievedHighScore = false;
         PrintHighScoresAndNames();
-
     }
 
     [System.Serializable]
     class HighscoreData
     {
-        public string firstPlaceName, secondPlaceName, thirdPlaceName, fourthPlaceName, fifthPlaceName;
-        public int firstPlaceRounds, secondPlaceRounds, thirdPlaceRounds, fourthPlaceRounds, fifthPlaceRounds;
+        public string[] highscoreNames = new string[5];
+        public int[] highscoreValues = new int[5];
     }
 
     public void Save()
     {
         HighscoreData data = new HighscoreData();
 
-        data.firstPlaceName = highscoreNames[0];
-        data.secondPlaceName = highscoreNames[1];
-        data.thirdPlaceName = highscoreNames[2];
-        data.fourthPlaceName = highscoreNames[3];
-        data.fifthPlaceName = highscoreNames[4];
+        for (int i = 0; i < highscoreNames.Length; i++)
+        {
+            data.highscoreNames[i] = highscoreNames[i];
+            data.highscoreValues[i] = highscores[i];
 
-        data.firstPlaceRounds = highscores[0];
-        data.secondPlaceRounds = highscores[1];
-        data.thirdPlaceRounds = highscores[2];
-        data.fourthPlaceRounds = highscores[3];
-        data.fifthPlaceRounds = highscores[4];
+        }
         
         string json = JsonUtility.ToJson(data);
 
@@ -78,17 +72,12 @@ public class HighscoreLogic : MonoBehaviour
             string json = File.ReadAllText(path);
             HighscoreData data = JsonUtility.FromJson<HighscoreData>(json);
 
-            highscoreNames[0] = data.firstPlaceName;
-            highscoreNames[1] = data.secondPlaceName;
-            highscoreNames[2] = data.thirdPlaceName;
-            highscoreNames[3] = data.fourthPlaceName;
-            highscoreNames[4] = data.fifthPlaceName;
+            for (int i = 0; i < highscoreNames.Length; i++)
+            {
+                highscoreNames[i] = data.highscoreNames[i];
+                highscores[i] = data.highscoreValues[i];
 
-            highscores[0] = data.firstPlaceRounds;
-            highscores[1] = data.secondPlaceRounds;
-            highscores[2] = data.thirdPlaceRounds;
-            highscores[3] = data.fourthPlaceRounds;
-            highscores[4] = data.fifthPlaceRounds;
+            }
 
             Debug.Log(path);
         }
