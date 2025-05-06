@@ -54,7 +54,6 @@ public class HighscoreLogic : MonoBehaviour
         {
             data.highscoreNames[i] = highscoreNames[i];
             data.highscoreValues[i] = highscores[i];
-
         }
         
         string json = JsonUtility.ToJson(data);

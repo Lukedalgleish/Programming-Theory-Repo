@@ -285,13 +285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024f76ac7286b2547b90e12338fb7917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highscores: 0000000000000000000000000000000000000000
-  highscoreNames:
-  - 
-  - 
-  - 
-  - 
-  - 
 --- !u!4 &118812627
 Transform:
   m_ObjectHideFlags: 0
@@ -1056,9 +1049,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6908c4e83842f40a7de08a565ecb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HighscoreRankings: {fileID: 286696069}
   highScoreUI: {fileID: 664081643}
   optionsUI: {fileID: 996788692}
-  HighscoreRankings: {fileID: 286696069}
 --- !u!4 &858000926
 Transform:
   m_ObjectHideFlags: 0
